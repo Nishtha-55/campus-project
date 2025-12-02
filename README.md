@@ -49,32 +49,6 @@ Image upload using Multer
 Stored on Cloudinary
 Fast CDN-based delivery
 
-📁 Project Structure
-Backend
-server/
-│── config/
-│── controllers/
-│── middlewares/
-│── models/
-│── routes/
-│── utils/
-│── server.js
-Frontend
-client/
-│── src/
-│   ├── pages/
-│   ├── components/
-│   ├── store/
-│   ├── utils/
-│   ├── App.jsx
-│   ├── main.jsx
-│── public/
-│── index.html
-🔧 Installation & Setup
-
-1️⃣ Clone the repository
-git clone https://github.com/your-username/campus-lostfound-frontend.git
-cd campus-lostfound-frontend
 
 🖥 Frontend Setup
 Install dependencies:
