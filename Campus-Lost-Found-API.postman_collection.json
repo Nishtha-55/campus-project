@@ -1,0 +1,723 @@
+{
+  "info": {
+    "name": "Campus Lost & Found API",
+    "description": "Complete API collection for Campus Lost & Found Portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@college.edu\",\n  \"phone\": \"1234567890\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@college.edu\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Updated\",\n  \"phone\": \"9876543210\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lost Items",
+      "item": [
+        {
+          "name": "Create Lost Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Black MacBook Pro",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "Electronics",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Black MacBook Pro 13 inch with silver keyboard",
+                  "type": "text"
+                },
+                {
+                  "key": "location_lost",
+                  "value": "Library, 3rd Floor",
+                  "type": "text"
+                },
+                {
+                  "key": "date_lost",
+                  "value": "2024-01-15",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/lost",
+              "host": ["{{base_url}}"],
+              "path": ["lost"]
+            }
+          }
+        },
+        {
+          "name": "Get All Lost Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/lost?page=1&limit=10&status=approved",
+              "host": ["{{base_url}}"],
+              "path": ["lost"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "approved"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Lost Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/lost/my-items?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["lost", "my-items"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Lost Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/lost/{{lost_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["lost", "{{lost_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Lost Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Black MacBook Pro Updated",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Updated description",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/lost/{{lost_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["lost", "{{lost_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Lost Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/lost/{{lost_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["lost", "{{lost_item_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Found Items",
+      "item": [
+        {
+          "name": "Create Found Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Physics Textbook",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "Books",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Physics textbook found near cafeteria",
+                  "type": "text"
+                },
+                {
+                  "key": "location_found",
+                  "value": "Cafeteria Area",
+                  "type": "text"
+                },
+                {
+                  "key": "date_found",
+                  "value": "2024-01-14",
+                  "type": "text"
+                },
+                {
+                  "key": "stored_at",
+                  "value": "library_desk",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/found",
+              "host": ["{{base_url}}"],
+              "path": ["found"]
+            }
+          }
+        },
+        {
+          "name": "Get All Found Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/found?page=1&limit=10&status=approved",
+              "host": ["{{base_url}}"],
+              "path": ["found"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "approved"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Found Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/found/my-items?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["found", "my-items"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Found Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/found/{{found_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["found", "{{found_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Found Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Physics Textbook Updated",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/found/{{found_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["found", "{{found_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Found Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/found/{{found_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["found", "{{found_item_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Claims",
+      "item": [
+        {
+          "name": "Create Claim",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item_id\": \"{{found_item_id}}\",\n  \"item_type\": \"found\",\n  \"claim_message\": \"This is my black MacBook that I lost last week\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/claims",
+              "host": ["{{base_url}}"],
+              "path": ["claims"]
+            }
+          }
+        },
+        {
+          "name": "Get My Claims",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/claims/user?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["claims", "user"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Claims by Item",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/claims/item/{{item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["claims", "item", "{{item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Claim Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claim_status\": \"approved\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/claims/{{claim_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["claims", "{{claim_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Claim",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/claims/{{claim_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["claims", "{{claim_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/statistics",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "statistics"]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/pending-items?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "pending-items"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/approve/{{item_id}}?itemType=lost",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "approve", "{{item_id}}"],
+              "query": [
+                {
+                  "key": "itemType",
+                  "value": "lost"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reject Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/reject/{{item_id}}?itemType=lost",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "reject", "{{item_id}}"],
+              "query": [
+                {
+                  "key": "itemType",
+                  "value": "lost"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Item as Returned",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/mark-returned/{{item_id}}?itemType=lost",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "mark-returned", "{{item_id}}"],
+              "query": [
+                {
+                  "key": "itemType",
+                  "value": "lost"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Smart Match Lost Item",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/match/{{lost_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "match", "{{lost_item_id}}"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    },
+    {
+      "key": "admin_token",
+      "value": "your_admin_jwt_token_here",
+      "type": "string"
+    },
+    {
+      "key": "lost_item_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "found_item_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "claim_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "item_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
